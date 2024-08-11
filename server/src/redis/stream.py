@@ -1,4 +1,5 @@
-class StreamConsumer:
+
+    class StreamConsumer:
     def __init__(self, redis_client):
         self.redis_client = redis_client
 
@@ -13,4 +14,6 @@ class StreamConsumer:
         await self.redis_client.xdel(stream_channel, message_id)
         
     from .config import Redis
+    
+    
 
