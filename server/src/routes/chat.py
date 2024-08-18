@@ -79,4 +79,84 @@ async def websocket_endpoint(websocket: WebSocket, token: str = Depends(get_toke
     except WebSocketDisconnect:
         manager.disconnect(websocket)
         from ..redis.cache import Cache
+    
+    
+    @chat.websocket("/chat")
+async def websocket_endpoint(websocket: WebSocket, token: str = Depends(get_token)):
+    await manager.connect(websocket)
+    redis_client = await redis.create_connection()
+    producer = Producer(redis_client)
+    json_client = redis.create_rejson_connection()
 
+    try:
+        while True:
+            data = await websocket.receive_text()
+            stream_data = {}
+            stream_data[token] = data
+            await producer.add_to_stream(stream_data, "message_channel")
+            await manager.send_personal_message(f"Response: Simulating response from the GPT service", websocket)
+
+    except WebSocketDisconnect:
+        manager.disconnect(websocket)
+        from ..redis.cache import Cache
+        
+        
+        
+        
+        @chat.websocket("/chat")
+async def websocket_endpoint(websocket: WebSocket, token: str = Depends(get_token)):
+    await manager.connect(websocket)
+    redis_client = await redis.create_connection()
+    producer = Producer(redis_client)
+    json_client = redis.create_rejson_connection()
+
+    try:
+        while True:
+            data = await websocket.receive_text()
+            stream_data = {}
+            stream_data[token] = data
+            await producer.add_to_stream(stream_data, "message_channel")
+            await manager.send_personal_message(f"Response: Simulating response from the GPT service", websocket)
+
+    except WebSocketDisconnect:
+        manager.disconnect(websocket)
+        from ..redis.cache import Cache
+        
+        
+        @chat.websocket("/chat")
+async def websocket_endpoint(websocket: WebSocket, token: str = Depends(get_token)):
+    await manager.connect(websocket)
+    redis_client = await redis.create_connection()
+    producer = Producer(redis_client)
+    json_client = redis.create_rejson_connection()
+
+    try:
+        while True:
+            data = await websocket.receive_text()
+            stream_data = {}
+            stream_data[token] = data
+            await producer.add_to_stream(stream_data, "message_channel")
+            await manager.send_personal_message(f"Response: Simulating response from the GPT service", websocket)
+
+    except WebSocketDisconnect:
+        manager.disconnect(websocket)
+        from ..redis.cache import Cache
+        
+        @chat.websocket("/chat")
+async def websocket_endpoint(websocket: WebSocket, token: str = Depends(get_token)):
+    await manager.connect(websocket)
+    redis_client = await redis.create_connection()
+    producer = Producer(redis_client)
+    json_client = redis.create_rejson_connection()
+
+    try:
+        while True:
+            data = await websocket.receive_text()
+            stream_data = {}
+            stream_data[token] = data
+            await producer.add_to_stream(stream_data, "message_channel")
+            await manager.send_personal_message(f"Response: Simulating response from the GPT service", websocket)
+
+    except WebSocketDisconnect:
+        manager.disconnect(websocket)
+        from ..redis.cache import Cache
